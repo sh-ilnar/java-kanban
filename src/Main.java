@@ -1,3 +1,9 @@
+import model.Epic;
+import model.Status;
+import model.Subtask;
+import model.Task;
+import services.Manager;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -20,7 +26,7 @@ public class Main {
         System.out.println(manager.getEpics());
         System.out.println(manager.getSubtasks());
 
-        Task test_task = new Task(1, "Первая задача (обновлено)", "Описание");
+        Task test_task = new Task("Первая задача (обновлено)", "Описание");
         test_task.setStatus(Status.IN_PROGRESS);
         manager.updateTask(test_task);
 

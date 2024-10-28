@@ -1,5 +1,6 @@
+package model;
+
 import java.util.Objects;
-import java.util.UUID;
 
 public class Task {
 
@@ -8,8 +9,7 @@ public class Task {
     protected String description;
     protected Status status;
 
-    public Task(int id, String name, String description) {
-        this.id = id;
+    public Task(String name, String description) {
         this.name = name;
         this.description = description;
         this.status = Status.NEW;
@@ -31,6 +31,10 @@ public class Task {
         return status;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -41,12 +45,6 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public final void update(Task task) {
-        this.name = task.name;
-        this.description = task.description;
-        this.status = task.status;
     }
 
     @Override

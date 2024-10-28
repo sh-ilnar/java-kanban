@@ -1,24 +1,16 @@
-import java.util.UUID;
+package model;
 
 public class Subtask extends Task {
 
-    private final Epic epic;
+    private Epic epic;
 
-    public Subtask(int id, String name, String description, Epic epic) {
-        super(id, name, description);
+    public Subtask(String name, String description, Epic epic) {
+        super(name, description);
         this.epic = epic;
     }
 
     public Epic getEpic() {
         return epic;
-    }
-
-    public final void update(Subtask subtask) {
-        this.name = subtask.name;
-        this.description = subtask.description;
-        this.status = subtask.status;
-
-        epic.updateStatus();
     }
 
     @Override
