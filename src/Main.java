@@ -10,18 +10,26 @@ public class Main {
 
         TaskManager taskManager = new TaskManager();
 
-        Task task1 = taskManager.createTask("Первая задача", "Описание 1");
-        Task task2 = taskManager.createTask("Вторая задача", "Описание 2");
+        Task task1 = new Task("Первая задача", "Описание 1");
+        taskManager.createTask(task1);
+        Task task2 = new Task("Вторая задача", "Описание 2");
+        taskManager.createTask(task2);
 
         System.out.println(taskManager.getTasks());
 
-        Epic epic1 = taskManager.createEpic("Первый эпик", "Описание эпика 1");
-        Epic epic2 = taskManager.createEpic("Второй эпик", "Описание эпика 2");
+        Epic epic1 = new Epic("Первый эпик", "Описание эпика 1");
+        taskManager.createEpic(epic1);
+        Epic epic2 = new Epic("Второй эпик", "Описание эпика 2");
+        taskManager.createEpic(epic2);
 
-        Subtask subtask1_1 = taskManager.createSubtask("Подзадача 1 эпика 1", "Описание", epic1);
-        Subtask subtask1_2 = taskManager.createSubtask("Подзадача 2 эпика 1", "Описание", epic1);
-        Subtask subtask2_1 = taskManager.createSubtask("Подзадача 1 эпика 2", "Описание", epic2);
-        Subtask subtask2_2 = taskManager.createSubtask("Подзадача 2 эпика 2", "Описание", epic2);
+        Subtask subtask1_1 = new Subtask("Подзадача 1 эпика 1", "Описание", epic1);
+        taskManager.createSubtask(subtask1_1);
+        Subtask subtask1_2 = new Subtask("Подзадача 2 эпика 1", "Описание", epic1);
+        taskManager.createSubtask(subtask1_2);
+        Subtask subtask2_1 = new Subtask("Подзадача 1 эпика 2", "Описание", epic2);
+        taskManager.createSubtask(subtask2_1);
+        Subtask subtask2_2 = new Subtask("Подзадача 2 эпика 2", "Описание", epic2);
+        taskManager.createSubtask(subtask2_2);
 
         System.out.println(taskManager.getEpics());
         System.out.println(taskManager.getSubtasks());
@@ -44,7 +52,8 @@ public class Main {
         taskManager.deleteAllSubtasks();
         System.out.println(taskManager.getSubtasks());
 
-        Subtask subtask3 = taskManager.createSubtask("Подзадача 1 эпика 1", "Описание", epic1);
+        Subtask subtask3 = new Subtask("Подзадача 1 эпика 1", "Описание", epic1);
+        taskManager.createSubtask(subtask3);
         System.out.println(taskManager.getSubtasks());
     }
 }
