@@ -15,6 +15,13 @@ public class Task {
         this.status = Status.NEW;
     }
 
+    public Task(int id, String name, String description, Status status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }
@@ -68,5 +75,13 @@ public class Task {
                 ", description='" + description + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+    public static Task copyOf(Task task) {
+        Task copy = new Task(task.name, task.description);
+        copy.id = task.id;
+        copy.status = task.status;
+
+        return copy;
     }
 }
