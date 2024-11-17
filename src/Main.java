@@ -11,7 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
 
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
 
         Task task1 = new Task("Первая задача", "Описание 1");
         taskManager.createTask(task1);

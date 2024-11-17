@@ -1,5 +1,6 @@
 package services;
 
+import interfaces.HistoryManager;
 import interfaces.TaskManager;
 import model.Epic;
 import model.Status;
@@ -16,7 +17,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void getTaskById_validId_ReturnTask() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Task task1 = new Task("Тест", "Тестовое описание");
         taskManager.createTask(task1);
 
@@ -27,7 +29,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void getEpicById_validId_ReturnEpic() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic epic1 = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(epic1);
 
@@ -38,7 +41,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void getSubtaskById_validId_ReturnSubtask() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic epic1 = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(epic1);
         Subtask subtask1_1 = new Subtask("Подзадача 1 эпика 1", "Описание", epic1);
@@ -51,7 +55,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void createTask_newTask_addInTaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Task newTask = new Task("Тест", "Тестовое описание");
 
         taskManager.createTask(newTask);
@@ -62,7 +67,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void createTask_newTask_taskIsNotChanged() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Task newTask = new Task("Тест", "Тестовое описание");
         taskManager.createTask(newTask);
         List<Task> taskList = taskManager.getTasks();
@@ -74,7 +80,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void createEpic_newEpic_addInEpicList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
 
         taskManager.createEpic(newEpic);
@@ -85,7 +92,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void createEpic_newEpic_epicIsNotChanged() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         List<Epic> epicList = taskManager.getEpics();
@@ -96,7 +104,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void createSubtask_newSubtask_addInSubtaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -109,7 +118,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void createSubtask_newSubtask_subtaskIsNotChanged() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -123,7 +133,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void deleteAllTasks_newTask_emptyTaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Task newTask = new Task("Тест", "Тестовое описание");
         taskManager.createTask(newTask);
 
@@ -135,7 +146,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void deleteAllEpics_newEpic_emptyTaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
 
@@ -147,7 +159,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void deleteAllSubtasks_newSubtask_emptySubtaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -161,7 +174,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void deleteTaskById_newTask_emptyTaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Task newTask = new Task("Тест", "Тестовое описание");
         taskManager.createTask(newTask);
 
@@ -173,7 +187,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void deleteEpicById_newEpic_emptyTaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
 
@@ -185,7 +200,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void deleteSubtaskById_newSubtask_emptySubtaskList() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -199,7 +215,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void updateTask_newTask_updatedTask() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Task newTask = new Task("Тест", "Тестовое описание");
         taskManager.createTask(newTask);
         int newTaskId = newTask.getId();
@@ -213,7 +230,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void updateEpic_newEpic_updatedEpic() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         int newEpicId = newEpic.getId();
@@ -227,7 +245,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void updateSubtask_newSubtask_updatedSubtask() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -243,7 +262,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void NewEpicStatus_emptySubtask_returnNewStatus() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
 
@@ -252,7 +272,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void NewEpicStatus_newStatusSubtask_returnNewStatus() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -263,7 +284,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void InProgressEpicStatus_inProgressStatusSubtask_returnInProgressStatus() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -277,7 +299,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void InProgressEpicStatus_doneStatusSubtask_returnInProgressStatus() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -291,7 +314,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void InProgressEpicStatus_newDoneStatusSubtask_returnInProgressStatus() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
@@ -307,7 +331,8 @@ class InMemoryTaskManagerTest {
 
     @Test
     void InProgressEpicStatus_mixStatusSubtask_returnInProgressStatus() {
-        TaskManager taskManager = Managers.getDefault();
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
         Epic newEpic = new Epic("Тест", "Тестовое описание");
         taskManager.createEpic(newEpic);
         Subtask newSubtask = new Subtask("Подзадача 1 эпика 1", "Описание", newEpic);
