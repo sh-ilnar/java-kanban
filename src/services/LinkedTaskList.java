@@ -5,7 +5,6 @@ import model.Task;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
 public class LinkedTaskList {
     private Map<Integer, Node<Task>> nodeMap = new HashMap<Integer, Node<Task>>();
