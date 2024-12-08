@@ -8,19 +8,20 @@ import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private List<Task> historyViewTasks = new ArrayList<>();
+    private LinkedTaskList historyViewTasks = new LinkedTaskList();
 
     @Override
     public List<Task> getHistory() {
-        return new ArrayList<>(historyViewTasks);
+        return historyViewTasks.getTasks();
     }
 
     @Override
     public void add(Task task) {
-        if (historyViewTasks.size() >= 10)
-            historyViewTasks.removeFirst();
+        historyViewTasks.linkLast(task);
+    }
 
-        // переделал, но если добавлять в историю саму таску, а не копию, то последний тест по ТЗ не выполнится
-        historyViewTasks.add(task);
+    @Override
+    public void remove(int id) {
+        historyViewTasks.removeNode(id);
     }
 }

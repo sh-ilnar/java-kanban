@@ -19,7 +19,6 @@ public class Epic extends Task {
         this.subtasks = subtasks;
     }
 
-
     @Override
     public String toString() {
         return "Epic{" +
