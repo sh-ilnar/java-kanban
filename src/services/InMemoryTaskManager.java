@@ -110,7 +110,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void deleteAllSubtasks() {
-        for(Epic epic : getEpics()) {
+        for (Epic epic : getEpics()) {
             List<Subtask> epicSubtasks = epic.getSubtasks();
             epicSubtasks.clear();
         }
@@ -125,7 +125,7 @@ public class InMemoryTaskManager implements TaskManager {
     @Override
     public void deleteEpicById(int id) {
         List<Subtask> epicSubtasks = epics.get(id).getSubtasks();
-        for (Subtask s: epicSubtasks) {
+        for (Subtask s : epicSubtasks) {
             subtasks.remove(++maxId);
         }
         epics.remove(id);
@@ -144,14 +144,14 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateTask(Task task) {
-        if(tasks.containsKey(task.getId())) {
-           tasks.put(task.getId(), task);
+        if (tasks.containsKey(task.getId())) {
+            tasks.put(task.getId(), task);
         }
     }
 
     @Override
     public void updateEpic(Epic epic) {
-        if(epics.containsKey(epic.getId())) {
+        if (epics.containsKey(epic.getId())) {
             epics.put(epic.getId(), epic);
             updateEpicStatus(epic.getId());
         }
@@ -159,7 +159,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void updateSubtask(Subtask subtask) {
-        if(subtasks.containsKey(subtask.getId())) {
+        if (subtasks.containsKey(subtask.getId())) {
             subtasks.put(subtask.getId(), subtask);
             updateEpicStatus(subtask.getEpic().getId());
         }
@@ -178,11 +178,10 @@ public class InMemoryTaskManager implements TaskManager {
         int newCount = 0;
         int doneCount = 0;
         for (Subtask subtask : subtasks) {
-            if(subtask.getStatus() == Status.IN_PROGRESS) {
+            if (subtask.getStatus() == Status.IN_PROGRESS) {
                 epic.setStatus(Status.IN_PROGRESS);
                 return;
-            }
-            else if (subtask.getStatus() == Status.NEW) newCount++;
+            } else if (subtask.getStatus() == Status.NEW) newCount++;
             else doneCount++;
         }
         if (newCount == subtasks.size())
