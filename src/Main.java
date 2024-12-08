@@ -43,27 +43,12 @@ public class Main {
         Epic epic2 = new Epic("Второй эпик", "Описание эпика 2");
         taskManager.createEpic(epic2);
 
-        Subtask subtask1_1 = new Subtask("Подзадача 1 эпика 1", "Описание", epic1);
-        taskManager.createSubtask(subtask1_1);
-        Subtask subtask1_2 = new Subtask("Подзадача 2 эпика 1", "Описание", epic1);
-        taskManager.createSubtask(subtask1_2);
-        Subtask subtask2_1 = new Subtask("Подзадача 1 эпика 2", "Описание", epic2);
-        taskManager.createSubtask(subtask2_1);
-        Subtask subtask2_2 = new Subtask("Подзадача 2 эпика 2", "Описание", epic2);
-        taskManager.createSubtask(subtask2_2);
-
         Task viewTask1 = taskManager.getTaskById(1);
         Task viewTask2 = taskManager.getTaskById(2);
         Epic viewEpic1 = taskManager.getEpicById(11);
-        Subtask viewSubtask1 = taskManager.getSubtaskById(13);
-        Subtask viewSubtask2 = taskManager.getSubtaskById(14);
-        Subtask viewSubtask3 = taskManager.getSubtaskById(16);
-        Subtask viewSubtask4 = taskManager.getSubtaskById(15);
         Task viewTask3 = taskManager.getTaskById(1);
         Task viewTask4 = taskManager.getTaskById(2);
         Epic viewEpic2 = taskManager.getEpicById(12);
-        //Epic viewEpic3 = taskManager.getEpicById(3);
-        //Epic viewEpic4 = taskManager.getEpicById(3);
         Task viewTask5 = taskManager.getTaskById(4);
         Task viewTask6 = taskManager.getTaskById(5);
         Task viewTask7 = taskManager.getTaskById(1);
