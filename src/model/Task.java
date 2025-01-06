@@ -84,4 +84,13 @@ public class Task {
 
         return copy;
     }
+
+    public String toCsvRow() {
+        return id + "," +
+                Type.TASK + "," +
+                name + "," +
+                status + "," +
+                description +
+                System.lineSeparator();
+    }
 }

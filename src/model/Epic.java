@@ -11,6 +11,10 @@ public class Epic extends Task {
         super(name, description);
     }
 
+    public Epic(Integer id, String name, String description, Status status) {
+        super(id, name, description, status);
+    }
+
     public List<Subtask> getSubtasks() {
         return subtasks;
     }
@@ -27,5 +31,14 @@ public class Epic extends Task {
                 ", description='" + description + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+    public String toCsvRow() {
+        return id + "," +
+                Type.EPIC + "," +
+                name + "," +
+                status + "," +
+                description +
+                System.lineSeparator();
     }
 }
