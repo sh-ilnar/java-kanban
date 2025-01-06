@@ -101,23 +101,23 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
 
         rows.add("id, type, name, status, description, epic" + System.lineSeparator());
 
-        for (Task t: this.getTasks()) {
+        for (Task t : this.getTasks()) {
             String row = t.toCsvRow();
             rows.add(row);
         }
 
-        for (Epic e: this.getEpics()) {
+        for (Epic e : this.getEpics()) {
             String row = e.toCsvRow();
             rows.add(row);
         }
 
-        for (Subtask s: this.getSubtasks()) {
+        for (Subtask s : this.getSubtasks()) {
             String row = s.toCsvRow();
             rows.add(row);
         }
 
         try (FileWriter fileWriter = new FileWriter(this.file, StandardCharsets.UTF_8)) {
-            for (String e: rows) {
+            for (String e : rows) {
                 fileWriter.write(e);
             }
         } catch (IOException ex) {
@@ -141,7 +141,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 if (epic.getId() > maxId) maxId = epic.getId();
                 break;
             case Type.SUBTASK:
-                if(epics.containsKey(Integer.parseInt(cols[5]))) {
+                if (epics.containsKey(Integer.parseInt(cols[5]))) {
                     Epic subtaskEpic = epics.get(Integer.parseInt(cols[5]));
                     Subtask subtask = new Subtask(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]), subtaskEpic);
                     subtasks.put(subtask.getId(), subtask);
@@ -162,7 +162,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         try (BufferedReader fileReader = new BufferedReader(new FileReader(file.getPath(), StandardCharsets.UTF_8))) {
             while (fileReader.ready()) {
                 String line = fileReader.readLine();
-                if(!line.startsWith("id, type, name, status, description, epic")) {
+                if (!line.startsWith("id, type, name, status, description, epic")) {
                     rows.add(line);
                 }
             }
@@ -170,7 +170,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             System.out.println(ex.getMessage());
         }
 
-        if(!rows.isEmpty()) {
+        if (!rows.isEmpty()) {
             for (String row : rows) {
                 taskManager.taskFromString(row);
             }
