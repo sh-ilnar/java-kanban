@@ -7,10 +7,11 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
-    private File file;
+    private final File file;
 
     public FileBackedTaskManager(HistoryManager historyManager, File file) {
         super(historyManager);
@@ -95,7 +96,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         save();
     }
 
-    void save() {
+    private void save() {
 
         List<String> rows = new ArrayList<>();
 
@@ -116,63 +117,79 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             rows.add(row);
         }
 
-        try (FileWriter fileWriter = new FileWriter(this.file, StandardCharsets.UTF_8)) {
+        try (BufferedWriter fileWriter = new BufferedWriter(new FileWriter(this.file, StandardCharsets.UTF_8))) {
             for (String e : rows) {
                 fileWriter.write(e);
             }
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            throw new ManagerSaveException("Ошибка сохранения в файл.");
         }
     }
 
-    void taskFromString(String value) {
+    private Task taskFromString(String value) {
         String[] cols = value.split(",");
-        Type type = Type.valueOf(cols[1]);
-
-        switch (type) {
-            case Type.TASK:
-                Task task = new Task(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]));
-                tasks.put(task.getId(), task);
-                if (task.getId() > maxId) maxId = task.getId();
-                break;
-            case Type.EPIC:
-                Epic epic = new Epic(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]));
-                epics.put(epic.getId(), epic);
-                if (epic.getId() > maxId) maxId = epic.getId();
-                break;
-            case Type.SUBTASK:
-                if (epics.containsKey(Integer.parseInt(cols[5]))) {
-                    Epic subtaskEpic = epics.get(Integer.parseInt(cols[5]));
-                    Subtask subtask = new Subtask(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]), subtaskEpic);
-                    subtasks.put(subtask.getId(), subtask);
-                    if (subtask.getId() > maxId) maxId = subtask.getId();
-                }
-                break;
-            default:
-                break;
-        }
+        return new Task(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]));
     }
 
-    static FileBackedTaskManager loadFromFile(HistoryManager historyManager, File file) {
+    private Epic epicFromString(String value) {
+        String[] cols = value.split(",");
+        return new Epic(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]));
+    }
+
+    private Subtask subtaskFromString(String value) {
+        String[] cols = value.split(",");
+        Epic subtaskEpic = this.getEpicById(Integer.parseInt(cols[5]));
+        return new Subtask(Integer.parseInt(cols[0]), cols[2], cols[4], Status.valueOf(cols[3]), subtaskEpic);
+    }
+
+    public static FileBackedTaskManager loadFromFile(HistoryManager historyManager, File file) {
 
         FileBackedTaskManager taskManager = new FileBackedTaskManager(historyManager, file);
-
         List<String> rows = new ArrayList<>();
 
         try (BufferedReader fileReader = new BufferedReader(new FileReader(file.getPath(), StandardCharsets.UTF_8))) {
             while (fileReader.ready()) {
                 String line = fileReader.readLine();
-                if (!line.startsWith("id, type, name, status, description, epic")) {
+                if (!line.isEmpty() && !line.startsWith("id, type, name, status, description, epic")) {
                     rows.add(line);
                 }
             }
         } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            throw new ManagerSaveException("Ошибка сохранения в файл.");
         }
 
         if (!rows.isEmpty()) {
             for (String row : rows) {
-                taskManager.taskFromString(row);
+
+                String[] cols = row.split(",");
+                Type type = Type.valueOf(cols[1]);
+
+                switch (type) {
+                    case Type.TASK:
+                        Task task = taskManager.taskFromString(row);
+                        Map<Integer, Task> tasks = taskManager.getTasksMap();
+                        tasks.put(task.getId(), task);
+                        if (task.getId() > taskManager.getMaxId()) {
+                            taskManager.setMaxId(task.getId());
+                        }
+                        break;
+                    case Type.EPIC:
+                        Epic epic = taskManager.epicFromString(row);
+                        Map<Integer, Epic> epics = taskManager.getEpicsMap();
+                        epics.put(epic.getId(), epic);
+                        if (epic.getId() > taskManager.getMaxId()) {
+                            taskManager.setMaxId(epic.getId());
+                        }
+                        break;
+                    case Type.SUBTASK:
+                        Subtask subtask = taskManager.subtaskFromString(row);
+                        Map<Integer, Subtask> subtasks = taskManager.getSubpaskMap();
+                        subtasks.put(subtask.getId(), subtask);
+                        if (subtask.getId() > taskManager.getMaxId()) {
+                            taskManager.setMaxId(subtask.getId());
+                        }
+                        break;
+                }
             }
         }
 

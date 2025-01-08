@@ -1,5 +1,6 @@
 import interfaces.HistoryManager;
 import interfaces.TaskManager;
+import model.Epic;
 import model.Task;
 import services.Managers;
 
@@ -12,8 +13,13 @@ public class Main {
         HistoryManager historyManager = Managers.getDefaultHistory();
         TaskManager taskManager = Managers.getFromBackedFile(historyManager, Path.of("file_backed.csv"));
         printAllTasks(taskManager);
-        Task task3 = new Task("4 задача", "Описание 4");
-        taskManager.createTask(task3);
+        Task task1 = new Task("2 задача", "Описание 2");
+        taskManager.createTask(task1);
+
+        //Epic epic1 = new Epic("Первый эпик", "Описание эпика 1");
+        //taskManager.createEpic(epic1);
+        Epic epic2 = new Epic("Второй эпик", "Описание эпика 2");
+        taskManager.createEpic(epic2);
 
         printAllTasks(taskManager);
 
