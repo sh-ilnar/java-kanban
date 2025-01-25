@@ -26,6 +26,26 @@ public class InMemoryTaskManager implements TaskManager {
         this.historyManager = historyManager;
     }
 
+    public int getMaxId() {
+        return maxId;
+    }
+
+    public void setMaxId(int id) {
+        maxId = id;
+    }
+
+    public Map<Integer, Task> getTasksMap() {
+        return tasks;
+    }
+
+    public Map<Integer, Epic> getEpicsMap() {
+        return epics;
+    }
+
+    public Map<Integer, Subtask> getSubpaskMap() {
+        return subtasks;
+    }
+
     @Override
     public List<Task> getTasks() {
         return new ArrayList<>(tasks.values());

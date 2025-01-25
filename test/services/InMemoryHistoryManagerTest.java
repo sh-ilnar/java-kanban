@@ -39,25 +39,4 @@ class InMemoryHistoryManagerTest {
         assertNotNull(history, "История не найдена");
         assertEquals(1, history.size(), "В истории не 1 элемент");
     }
-
-    /*
-    @Test
-    void add_updateTask_notUpdatedHistory() {
-        TaskManager taskManager = Managers.getDefault();
-        Task task = new Task("Первоначальное наименование", "Тестовое описание");
-        taskManager.createTask(task);
-        HistoryManager historyManager = taskManager.getHistoryManager();
-        historyManager.add(task);
-
-        task.setName("Измененное наименование");
-        historyManager.add(task);
-
-        final List<Task> history = historyManager.getHistory();
-        Task viewedTask1 = history.get(0);
-        Task viewedTask2 = history.get(1);
-
-        assertEquals("Первоначальное наименование", viewedTask1.getName(), "Версия была изменена");
-        assertEquals("Измененное наименование", viewedTask2.getName(), "Версия была изменена");
-    }
-    */
 }
