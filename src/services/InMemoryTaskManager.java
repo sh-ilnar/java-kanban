@@ -100,8 +100,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void createTask(Task task) {
         if (isDateIntersection(task)) {
             throw new IllegalArgumentException("Задача " + task.getName() + " пересекается с другими задачами.");
-        }
-        else {
+        } else {
             task.setId(++maxId);
             tasks.put(task.getId(), task);
             if (!task.getStartTime().equals(Task.minDate)) {
@@ -120,8 +119,7 @@ public class InMemoryTaskManager implements TaskManager {
     public void createSubtask(Subtask subtask) {
         if (isDateIntersection(subtask)) {
             throw new IllegalArgumentException("Подзадача " + subtask.getName() + " пересекается с другими задачами.");
-        }
-        else {
+        } else {
             Epic epic = subtask.getEpic();
             List<Subtask> epicSubtasks = epic.getSubtasks();
             subtask.setId(++maxId);
@@ -185,8 +183,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (tasks.containsKey(task.getId())) {
             if (isDateIntersection(task)) {
                 throw new IllegalArgumentException("Задача " + task.getName() + " пересекается с другими задачами.");
-            }
-            else {
+            } else {
                 tasks.put(task.getId(), task);
             }
         }
@@ -205,8 +202,7 @@ public class InMemoryTaskManager implements TaskManager {
         if (subtasks.containsKey(subtask.getId())) {
             if (isDateIntersection(subtask)) {
                 throw new IllegalArgumentException("Подзадача " + subtask.getName() + " пересекается с другими задачами.");
-            }
-            else {
+            } else {
                 subtasks.put(subtask.getId(), subtask);
                 updateEpicStatus(subtask.getEpic().getId());
                 updateEpicDuration(subtask.getEpic().getId());
@@ -292,6 +288,6 @@ public class InMemoryTaskManager implements TaskManager {
         return prioritizedTasks.stream()
                 .filter(x -> !x.getStartTime().equals(Task.minDate))
                 .anyMatch(x -> (x.getEndTime().isAfter(task.getStartTime()) && x.getStartTime().isBefore(task.getStartTime()))
-                            || (x.getStartTime().isBefore(task.getEndTime()) && x.getEndTime().isAfter(task.getStartTime())));
+                        || (x.getStartTime().isBefore(task.getEndTime()) && x.getEndTime().isAfter(task.getStartTime())));
     }
 }
