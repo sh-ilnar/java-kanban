@@ -57,5 +57,14 @@ class InMemoryTaskManagerTest extends TaskManagerTest<InMemoryTaskManager> {
         Assertions.assertEquals(newSubtask, subtaskList.getFirst(), "Подзадачи не совпадают");
     }
 
+    @Test
+    void createTask_intersectionTask_catchException() {
+        Task task1 = new Task("Тест", "Тестовое описание", Duration.of(240, ChronoUnit.MINUTES), LocalDateTime.parse("01.05.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+        taskManager.createTask(task1);
 
+        assertThrows(IllegalArgumentException.class, () -> {
+            Task task2 = new Task("Тест", "Тестовое описание", Duration.of(240, ChronoUnit.MINUTES), LocalDateTime.parse("01.05.2025 01:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
+            taskManager.createTask(task2);
+        }, "Пересечение по времени должно приводить к ошибке");
+    }
 }
