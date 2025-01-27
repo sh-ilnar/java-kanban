@@ -5,7 +5,7 @@ import model.Subtask;
 import model.Task;
 import services.Managers;
 
-import java.nio.file.Path;
+//import java.nio.file.Path;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,56 +27,49 @@ public class Main {
         Task task1 = new Task("Задача 1", "Описание новой задачи", Duration.of(100, ChronoUnit.MINUTES), LocalDateTime.parse("20.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         try {
             taskManager.createTask(task1);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Task task2 = new Task("Задача 2", "Описание новой задачи", Duration.of(20, ChronoUnit.MINUTES), LocalDateTime.parse("20.01.2025 01:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         try {
             taskManager.createTask(task2);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Task task3 = new Task("Задача 3", "Описание новой задачи", Duration.of(30, ChronoUnit.MINUTES), LocalDateTime.parse("01.01.2025 03:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         try {
             taskManager.createTask(task3);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Task task4 = new Task("Задача 4", "Описание новой задачи", Duration.of(100, ChronoUnit.MINUTES), LocalDateTime.parse("01.01.2025 02:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         try {
             taskManager.createTask(task4);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Task task5 = new Task("Задача 5", "Описание новой задачи", Duration.of(100, ChronoUnit.MINUTES), LocalDateTime.parse("01.01.2025 01:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")));
         try {
             taskManager.createTask(task5);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Task task6 = new Task("Задача 6", "Описание новой задачи", Duration.of(100, ChronoUnit.MINUTES));
         try {
             taskManager.createTask(task6);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Task task7 = new Task("Задача 7", "Описание новой задачи", Duration.of(100, ChronoUnit.MINUTES));
         try {
             taskManager.createTask(task7);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
@@ -88,32 +81,28 @@ public class Main {
         Subtask subtask1_1 = new Subtask("Подзадача 1 эпика 1", "Описание", Duration.of(100, ChronoUnit.MINUTES), LocalDateTime.parse("02.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic1);
         try {
             taskManager.createSubtask(subtask1_1);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Subtask subtask1_2 = new Subtask("Подзадача 2 эпика 1", "Описание", Duration.of(10, ChronoUnit.MINUTES), LocalDateTime.parse("02.01.2025 01:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic1);
         try {
             taskManager.createSubtask(subtask1_2);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Subtask subtask2_1 = new Subtask("Подзадача 1 эпика 2", "Описание", Duration.of(15, ChronoUnit.MINUTES), LocalDateTime.parse("03.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic2);
         try {
             taskManager.createSubtask(subtask2_1);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
         Subtask subtask2_2 = new Subtask("Подзадача 2 эпика 2", "Описание", Duration.of(1, ChronoUnit.MINUTES), LocalDateTime.now(), epic2);
         try {
             taskManager.createSubtask(subtask2_2);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
