@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Task implements Comparable<Task>{
+public class Task implements Comparable<Task> {
 
     protected int id;
     protected String name;
@@ -145,7 +145,7 @@ public class Task implements Comparable<Task>{
                 ", duration=" + duration.toMinutes() +
                 ", startTime=" + startTime.format(formatter) +
                 ", endTime=" + getEndTime() +
-                '}';
+                "}";
     }
 
     public String toCsvRow() {
