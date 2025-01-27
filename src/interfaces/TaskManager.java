@@ -5,6 +5,7 @@ import model.Subtask;
 import model.Task;
 
 import java.util.List;
+import java.util.Set;
 
 public interface TaskManager {
 
@@ -50,5 +51,11 @@ public interface TaskManager {
 
     void updateEpicStatus(int id);
 
+    void updateEpicDuration(int id);
+
+    void updateEpicStartEndTime(int id);
+
     HistoryManager getHistoryManager();
+
+    Set<Task> getPrioritizedTasks();
 }

@@ -13,6 +13,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 class InMemoryHistoryManagerTest {
 
     @Test
+    void getHistory_createHistoryManager_returnedEmptyHistory() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
+
+        final List<Task> history = historyManager.getHistory();
+
+        assertNotNull(history, "История не найдена");
+        assertEquals(0, history.size(), "Иятория не пустая");
+    }
+
+    @Test
     void getHistory_getTask_returnedHistory() {
         HistoryManager historyManager = Managers.getDefaultHistory();
         TaskManager taskManager = Managers.getDefault(historyManager);
@@ -38,5 +49,19 @@ class InMemoryHistoryManagerTest {
 
         assertNotNull(history, "История не найдена");
         assertEquals(1, history.size(), "В истории не 1 элемент");
+    }
+
+    @Test
+    void remove_addTask_notEmptyHistory() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        TaskManager taskManager = Managers.getDefault(historyManager);
+        Task task = new Task("Тест", "Тестовое описание");
+        taskManager.createTask(task);
+
+        historyManager.add(task);
+        historyManager.remove(task.getId());
+        final List<Task> history = historyManager.getHistory();
+
+        assertEquals(0, history.size(), "Иятория не пустая");
     }
 }
