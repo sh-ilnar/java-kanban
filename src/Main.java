@@ -78,30 +78,30 @@ public class Main {
         Epic epic2 = new Epic("2 эпик", "Описание эпика 2");
         taskManager.createEpic(epic2);
 
-        Subtask subtask1_1 = new Subtask("Подзадача 1 эпика 1", "Описание", Duration.of(100, ChronoUnit.MINUTES), LocalDateTime.parse("02.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic1);
+        Subtask subtask11 = new Subtask("Подзадача 1 эпика 1", "Описание", Duration.of(100, ChronoUnit.MINUTES), LocalDateTime.parse("02.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic1);
         try {
-            taskManager.createSubtask(subtask1_1);
+            taskManager.createSubtask(subtask11);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
-        Subtask subtask1_2 = new Subtask("Подзадача 2 эпика 1", "Описание", Duration.of(10, ChronoUnit.MINUTES), LocalDateTime.parse("02.01.2025 01:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic1);
+        Subtask subtask12 = new Subtask("Подзадача 2 эпика 1", "Описание", Duration.of(10, ChronoUnit.MINUTES), LocalDateTime.parse("02.01.2025 01:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic1);
         try {
-            taskManager.createSubtask(subtask1_2);
+            taskManager.createSubtask(subtask12);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
-        Subtask subtask2_1 = new Subtask("Подзадача 1 эпика 2", "Описание", Duration.of(15, ChronoUnit.MINUTES), LocalDateTime.parse("03.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic2);
+        Subtask subtask21 = new Subtask("Подзадача 1 эпика 2", "Описание", Duration.of(15, ChronoUnit.MINUTES), LocalDateTime.parse("03.01.2025 00:00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm")), epic2);
         try {
-            taskManager.createSubtask(subtask2_1);
+            taskManager.createSubtask(subtask21);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
 
-        Subtask subtask2_2 = new Subtask("Подзадача 2 эпика 2", "Описание", Duration.of(1, ChronoUnit.MINUTES), LocalDateTime.now(), epic2);
+        Subtask subtask22 = new Subtask("Подзадача 2 эпика 2", "Описание", Duration.of(1, ChronoUnit.MINUTES), LocalDateTime.now(), epic2);
         try {
-            taskManager.createSubtask(subtask2_2);
+            taskManager.createSubtask(subtask22);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
